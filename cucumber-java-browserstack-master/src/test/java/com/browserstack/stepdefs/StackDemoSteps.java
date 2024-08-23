@@ -34,10 +34,9 @@ public class StackDemoSteps {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("browserstack.yml");
         Map<String, Object> config = yaml.load(inputStream);
         
-        // Extract BrowserStack credentials and capabilities
-        Map<String, String> browserstack = (Map<String, String>) config.get("browserstack");
-        String username = browserstack.get("username");
-        String accessKey = browserstack.get("accessKey");
+     // Extract BrowserStack credentials
+        String username = (String) config.get("userName");
+        String accessKey = (String) config.get("accessKey");
         
         MutableCapabilities capabilities = new MutableCapabilities();
         HashMap<String, String> bstackOptions = new HashMap<>();
