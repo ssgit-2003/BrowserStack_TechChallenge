@@ -26,21 +26,20 @@ public class StackDemoSteps {
     @Before
     public void setUp() throws MalformedURLException {
     	
-    	 // Load BrowserStack credentials from environment variables or configuration file
-        String username = "satyamsharma_bOU1C6"; // Replace with your BrowserStack username
-        String accessKey = "9DRKFzx6AcPX8QKeCuxS"; // Replace with your BrowserStack access key
+   // Load BrowserStack credentials
+        String username = "satyamsharma_bOU1C6"; 
+        String accessKey = "9DRKFzx6AcPX8QKeCuxS"; 
 
         
         MutableCapabilities capabilities = new MutableCapabilities();
         HashMap<String, String> bstackOptions = new HashMap<>();
         bstackOptions.putIfAbsent("source", "cucumber-java:sample-master:v1.2");
         capabilities.setCapability("bstack:options", bstackOptions);
+        
         //Update URL to include credentials
         String browserStackUrl = "https://" + username + ":" + accessKey + "@hub.browserstack.com/wd/hub";
         driver = new RemoteWebDriver(new URL(browserStackUrl), capabilities);
 
-        //driver = new RemoteWebDriver(
-                //new URL("https://hub.browserstack.com/wd/hub"), capabilities);
         homePage = new HomePage(driver);
     }
 
@@ -75,7 +74,6 @@ public class StackDemoSteps {
     	WebDriverUtils.setImplicitWait(driver, 2);
     	 String favouriteProductText = homePage.getFavourite(model);
     	 System.out.print(favouriteProductText + " is available under Favourites");
-         // Assert that the text contains the model
          Assert.assertTrue(favouriteProductText.contains(model));
 
     }

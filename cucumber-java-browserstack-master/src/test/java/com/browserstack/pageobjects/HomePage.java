@@ -32,8 +32,7 @@ public class HomePage {
 
 	    private WebElement filter;
 
-	    //@FindBy(xpath = "//div[@class='shelf-item'][.//p[@class='shelf-item__title' and text()='Galaxy S20+']]//div[@class='shelf-stopper']//button")
-	    public WebElement favIcon;
+	   	public WebElement favIcon;
 
 	    @FindBy(id = "favourites")
 	    private WebElement favLink;
