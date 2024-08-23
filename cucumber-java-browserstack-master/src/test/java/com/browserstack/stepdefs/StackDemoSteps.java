@@ -13,11 +13,14 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.testng.Assert;
+import org.yaml.snakeyaml.Yaml;
 
 public class StackDemoSteps {
     private WebDriver driver;
@@ -26,10 +29,15 @@ public class StackDemoSteps {
     @Before
     public void setUp() throws MalformedURLException {
     	
-    	 // Load BrowserStack credentials from environment variables or configuration file
-        String username = "satyamsharma_bOU1C6"; // Replace with your BrowserStack username
-        String accessKey = "9DRKFzx6AcPX8QKeCuxS"; // Replace with your BrowserStack access key
-
+    	  // Load browserstack.yml
+        Yaml yaml = new Yaml();
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("browserstack.yml");
+        Map<String, Object> config = yaml.load(inputStream);
+        
+        // Extract BrowserStack credentials and capabilities
+        Map<String, String> browserstack = (Map<String, String>) config.get("browserstack");
+        String username = browserstack.get("username");
+        String accessKey = browserstack.get("accessKey");
         
         MutableCapabilities capabilities = new MutableCapabilities();
         HashMap<String, String> bstackOptions = new HashMap<>();
