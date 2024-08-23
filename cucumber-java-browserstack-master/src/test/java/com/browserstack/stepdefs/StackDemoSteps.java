@@ -51,21 +51,21 @@ public class StackDemoSteps {
     @Given("user login with username {string} and password {string}")
     public void user_login_with_username_and_password(String username, String password) {
     	homePage.signIn(username, password);
-    	System.out.print("User Logged in Successfully");
+    	//System.out.println("User Logged in Successfully");
     }
 
     @When("user filter the product view to show {string} devices only")
     public void user_filter_the_product_view_to_show_devices_only(String productFilter) {
     	WebDriverUtils.setImplicitWait(driver, 2);
     	homePage.setFilter(productFilter);
-    	System.out.print(productFilter + " Filtered successfully");
+    	//System.out.println(productFilter + " Filtered successfully");
     }
 
     @When("user favorite the {string} device by clicking the yellow heart icon")
     public void user_favorite_the_device_by_clicking_the_yellow_heart_icon(String model) {
     	WebDriverUtils.setImplicitWait(driver, 2);
     	homePage.setFavourite(model);
-    	System.out.print(model + " Added to Favourites successfully");
+    	//System.out.println(model + " Added to Favourites successfully");
     }
 
     @Then("user verify that the {string} device is listed on the Favorites page")
@@ -73,7 +73,8 @@ public class StackDemoSteps {
     	homePage.navigateToFavourites();
     	WebDriverUtils.setImplicitWait(driver, 2);
     	 String favouriteProductText = homePage.getFavourite(model);
-    	 System.out.print(favouriteProductText + " is available under Favourites");
+    	 //System.out.println(favouriteProductText + " is available under Favourites");
+         // Assert that the text contains the model
          Assert.assertTrue(favouriteProductText.contains(model));
 
     }
