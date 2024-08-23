@@ -15,6 +15,6 @@ platforms:
     browserName: samsung
     deviceOrientation: portrait
 parallelsPerPlatform: 1
-browserstackLocal: false
+browserstackLocal: JENKINS_LABEL
 buildName: Demo_build_1
 projectName:  TechChallenge
