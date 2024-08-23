@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('setup') {
+         steps {
+            browserstack(credentialsId: '3b3b64c0-5105-43e2-a083-28e2cfa9f98a') {
+               sh 'mvn test'
+            }
+         }
+      }
+        
+    stages {
+        stage('Compile') {
+            steps {
+                withMaven(maven: '3.9.9') {
+					sh 'mvn clean install'
+				}
+            }
+        }
+
+
+        stage('Test') {
+            steps {
+                     withMaven(maven: '3.9.9') {
+					sh 'mvn test'
+                }
+            }
+        }
+
+        stage('Cucumber Report') {
+            steps {
+                	cucumber buildStatus: "UNSTABLE",
+                	fileIncludedPattern: "**/cucumberTestReport.json",
+                	jsonReportDirectory: 'target'
+                }
+            }
+        }
+
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: '**/cucumber-java-browserstack-master.jar', allowEmptyArchive: true
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
