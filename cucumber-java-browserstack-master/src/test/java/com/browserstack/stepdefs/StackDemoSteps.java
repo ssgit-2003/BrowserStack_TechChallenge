@@ -13,14 +13,11 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.Map;
 
 import org.testng.Assert;
-import org.yaml.snakeyaml.Yaml;
 
 public class StackDemoSteps {
     private WebDriver driver;
@@ -29,20 +26,16 @@ public class StackDemoSteps {
     @Before
     public void setUp() throws MalformedURLException {
     	
-    	  // Load browserstack.yml
-        Yaml yaml = new Yaml();
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("browserstack.yml");
-        Map<String, Object> config = yaml.load(inputStream);
-        
-     // Extract BrowserStack credentials
-        String username = (String) config.get("userName");
-        String accessKey = (String) config.get("accessKey");
+    	 // Load BrowserStack credentials from environment variables or configuration file
+        String username = "satyamsharma_bOU1C6"; // Replace with your BrowserStack username
+        String accessKey = "9DRKFzx6AcPX8QKeCuxS"; // Replace with your BrowserStack access key
+
         
         MutableCapabilities capabilities = new MutableCapabilities();
         HashMap<String, String> bstackOptions = new HashMap<>();
         bstackOptions.putIfAbsent("source", "cucumber-java:sample-master:v1.2");
         capabilities.setCapability("bstack:options", bstackOptions);
-        // Update URL to include credentials
+        //Update URL to include credentials
         String browserStackUrl = "https://" + username + ":" + accessKey + "@hub.browserstack.com/wd/hub";
         driver = new RemoteWebDriver(new URL(browserStackUrl), capabilities);
 

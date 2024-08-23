@@ -15,6 +15,12 @@ platforms:
     browserName: samsung
     deviceOrientation: portrait
 parallelsPerPlatform: 1
-browserstackLocal: JENKINS_LABEL
-buildName: Demo_build_1
-projectName:  TechChallenge
+browserstackLocal: false
+buildName: JENKINS_LABEL
+projectName: TechChallenge
+
+# Test Observability is an intelligent test reporting & debugging product. It collects data using the SDK. Read more about what data is collected at https://www.browserstack.com/docs/test-observability/references/terms-and-conditions
+# Visit observability.browserstack.com to see your test reports and insights. To disable test observability, specify `testObservability: false` in the key below.
+testObservability: true
+
+source: cucumber:eclipse:v1.0.8
